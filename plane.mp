@@ -2,9 +2,10 @@ beginfig(1);
 
     tracingonline := 1;
     numeric u, N;
-    N := 7;
+    N := 5;
     u := 1cm;
 
+    def randomcolor = (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1)) enddef;
 
     vardef sort_by_min(expr l)(suffix p) = 
         path swp;
@@ -21,7 +22,7 @@ beginfig(1);
         p
     enddef;
 
-    def build_line(expr d, b) = 
+    vardef build_line(expr d, b) = 
         numeric ii;
         ii := 0;
         path pp[];
@@ -52,45 +53,71 @@ beginfig(1);
                     and ((point 0 of pp[i]) - dd) .. pp[i] 
                 fi
             endfor;
-        drawit(qq scaled u);
+        qq
     enddef;
 
     def drawit(expr p) = 
         draw p withpen pencircle scaled 4pt withcolor white;
-        draw p withpen pencircle scaled 2pt;
+        draw p withpen pencircle scaled 2pt withcolor randomcolor;
     enddef;
 
-    color c;
+    vardef drawpic(expr n) =
 
-    c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-    drawoptions(withcolor black);
-    for i=0 upto 4:
-        drawit (((i,0)--(i,N-1)) scaled u);
-    endfor;
-    c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-    drawoptions(withcolor black);
-    for i=0 upto N-1:
-        drawit (((0,i)--(N-1,i)) scaled u);
-    endfor;
+        path qq;
 
+        for i=0 upto 4:
+            drawit (((i,0)--(i,N-1)) scaled u);
+        endfor;
 
-    for i=2:
+        for i=0 upto N-1:
+            drawit (((0,i)--(N-1,i)) scaled u);
+        endfor;
+        
         for k=0 upto N-1:
-            c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-            drawoptions(withcolor c);
-            build_line((i,1), k);
+            qq := build_line((abs(n),1), k);
+            if n<0:
+                qq := qq xscaled -1 shifted(4,0);
+            fi;
+            drawit (qq scaled u);
         endfor;
+    
+        for i=0 upto N-1:
+            for j=0 upto N-1:
+                draw (i,j) scaled u withpen pencircle scaled 8pt withcolor white;
+                draw (i,j) scaled u withpen pencircle scaled 6pt;
+            endfor;
+        endfor;
+
+        picture p;
+        p := currentpicture;
+        currentpicture := nullpicture;
+
+        p
+    enddef;
+
+    numeric shift;
+    shift := 10u;
+
+    picture pic[];
+    pic[0] := drawpic(1);
+    pic[1] := drawpic(2);
+    pic[2] := drawpic(-2);
+    pic[3] := drawpic(-1);
+
+    for i=1 upto 3:
+        pic[i] := pic[i] shifted (xpart urcorner pic[i-1] - xpart ulcorner pic[i],0);
+    endfor;
+
+    for i=0 upto 3:
+        draw pic[i];
     endfor;
 
 
 
-    drawoptions(withcolor black);
-    for i=0 upto N-1:
-        for j=0 upto N-1:
-            draw (i,j) scaled u withpen pencircle scaled 8pt withcolor white;
-            draw (i,j) scaled u withpen pencircle scaled 6pt;
-        endfor;
-    endfor;
+    pic[4] := currentpicture;
+
+    fill bbox currentpicture withcolor black;
+    draw pic[4];
 
 endfig;
 end;
