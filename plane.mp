@@ -22,7 +22,7 @@ beginfig(1);
         p
     enddef;
 
-    def build_line(expr d, b) = 
+    vardef build_line(expr d, b) = 
         numeric ii;
         ii := 0;
         path pp[];
@@ -53,7 +53,7 @@ beginfig(1);
                     and ((point 0 of pp[i]) - dd) .. pp[i] 
                 fi
             endfor;
-        drawit(qq scaled u);
+        qq
     enddef;
 
     def drawit(expr p) = 
@@ -63,6 +63,8 @@ beginfig(1);
 
     vardef drawpic(expr n) =
 
+        path qq;
+
         for i=0 upto 4:
             drawit (((i,0)--(i,N-1)) scaled u);
         endfor;
@@ -70,13 +72,15 @@ beginfig(1);
         for i=0 upto N-1:
             drawit (((0,i)--(N-1,i)) scaled u);
         endfor;
-
-        for i=n:
-            for k=0 upto N-1:
-                build_line((i,1), k);
-            endfor;
+        
+        for k=0 upto N-1:
+            qq := build_line((abs(n),1), k);
+            if n<0:
+                qq := qq xscaled -1 shifted(4,0);
+            fi;
+            drawit (qq scaled u);
         endfor;
-
+    
         for i=0 upto N-1:
             for j=0 upto N-1:
                 draw (i,j) scaled u withpen pencircle scaled 8pt withcolor white;
@@ -91,16 +95,29 @@ beginfig(1);
         p
     enddef;
 
+    numeric shift;
+    shift := 10u;
+
     picture pic[];
     pic[0] := drawpic(1);
     pic[1] := drawpic(2);
     pic[2] := drawpic(-2);
     pic[3] := drawpic(-1);
 
-    draw pic[0];
-    draw pic[1] shifted (8cm,0);
-    draw pic[2] shifted (2*8cm,0);
-    draw pic[3] shifted (3*8cm,0);
+    for i=1 upto 3:
+        pic[i] := pic[i] shifted (xpart urcorner pic[i-1] - xpart ulcorner pic[i],0);
+    endfor;
+
+    for i=0 upto 3:
+        draw pic[i];
+    endfor;
+
+
+
+    pic[4] := currentpicture;
+
+    fill bbox currentpicture withcolor black;
+    draw pic[4];
 
 endfig;
 end;
