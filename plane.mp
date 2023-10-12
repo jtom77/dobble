@@ -2,9 +2,10 @@ beginfig(1);
 
     tracingonline := 1;
     numeric u, N;
-    N := 7;
+    N := 5;
     u := 1cm;
 
+    def randomcolor = (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1)) enddef;
 
     vardef sort_by_min(expr l)(suffix p) = 
         path swp;
@@ -57,40 +58,49 @@ beginfig(1);
 
     def drawit(expr p) = 
         draw p withpen pencircle scaled 4pt withcolor white;
-        draw p withpen pencircle scaled 2pt;
+        draw p withpen pencircle scaled 2pt withcolor randomcolor;
     enddef;
 
-    color c;
+    vardef drawpic(expr n) =
 
-    c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-    drawoptions(withcolor black);
-    for i=0 upto 4:
-        drawit (((i,0)--(i,N-1)) scaled u);
-    endfor;
-    c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-    drawoptions(withcolor black);
-    for i=0 upto N-1:
-        drawit (((0,i)--(N-1,i)) scaled u);
-    endfor;
-
-
-    for i=2:
-        for k=0 upto N-1:
-            c := (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1));
-            drawoptions(withcolor c);
-            build_line((i,1), k);
+        for i=0 upto 4:
+            drawit (((i,0)--(i,N-1)) scaled u);
         endfor;
-    endfor;
 
-
-
-    drawoptions(withcolor black);
-    for i=0 upto N-1:
-        for j=0 upto N-1:
-            draw (i,j) scaled u withpen pencircle scaled 8pt withcolor white;
-            draw (i,j) scaled u withpen pencircle scaled 6pt;
+        for i=0 upto N-1:
+            drawit (((0,i)--(N-1,i)) scaled u);
         endfor;
-    endfor;
+
+        for i=n:
+            for k=0 upto N-1:
+                build_line((i,1), k);
+            endfor;
+        endfor;
+
+        for i=0 upto N-1:
+            for j=0 upto N-1:
+                draw (i,j) scaled u withpen pencircle scaled 8pt withcolor white;
+                draw (i,j) scaled u withpen pencircle scaled 6pt;
+            endfor;
+        endfor;
+
+        picture p;
+        p := currentpicture;
+        currentpicture := nullpicture;
+
+        p
+    enddef;
+
+    picture pic[];
+    pic[0] := drawpic(1);
+    pic[1] := drawpic(2);
+    pic[2] := drawpic(-2);
+    pic[3] := drawpic(-1);
+
+    draw pic[0];
+    draw pic[1] shifted (8cm,0);
+    draw pic[2] shifted (2*8cm,0);
+    draw pic[3] shifted (3*8cm,0);
 
 endfig;
 end;
