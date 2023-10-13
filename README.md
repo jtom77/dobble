@@ -23,7 +23,7 @@ $\mathbb{A}_q^2$ and that for every $(\mathbf{w}, b)$ there are exactly $q+1$ po
 The following picture shows the eight groups of parallel lines in the affine plane $\mathbb{A}_7^2$. 
 Note that each drawing direction actually matches one of the directions in $W$ if you regard them modulo 7. 
 
-![All lines](plane-1.png)
+![All lines](dobble-1.png)
 
 ## Projective planes over finite fields 
 
@@ -31,6 +31,10 @@ Now, two different lines intersect in one point if they are _not parallel_, i.e.
 whereas two lines with the same directions don't have a point in common in the affine plane. 
 To make sure that also in the parallel case two lines share an equal point, we assign a new element 
 $p_{\mathbf{w}} \not\in\mathbb{A}_q^2$, called a "point at infinity", to every line with direction $\mathbf{w}$. With this convention, any two lines have exactly one point in common, whether they share the same direction or not. Finally, we add another line containing all the "points at infinity". This guarantees that any two points lie on exactly one line.  (Technically, we are moving on to the _projective plane_ over $\mathbb{F}_q$, but for our purpose we can treat these infinity points and lines as simple _ad hoc_ postulations because at this point of the argument we don't need any algebraic structure of the point set anymore).
+
+The picture shows the affine lines from the first picture plus the point at infinity.
+
+![All lines](dobble-2.png)
 
 This finishes the construction of the Dobble card game. Substituting "card" with "line" and "point" with symbol, we see that all the required properties for the Dobble desk are satisfied. Numberwise, the desk has the following properties:
 
