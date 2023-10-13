@@ -36,11 +36,11 @@ The picture shows the affine lines from the first picture plus the point at infi
 
 ![All lines](dobble-2.png)
 
-This finishes the construction of the Dobble card game. Substituting "card" with "line" and "point" with symbol, we see that all the required properties for the Dobble desk are satisfied. Numberwise, the desk has the following properties:
+This finishes the construction of the $\mathbb{F}_{q}$ Dobble card game. Substituting "card" with "line" and "point" with symbol, we see that all the required properties for the Dobble desk are satisfied. Numberwise, the desk has the following properties:
 
 * Every card contains $q+1$ symbols. (Every line contains $q$ normal points plus one "point at infinity".)
 * There are $q^2 + q + 1$ different symbols. (The $q^2$ points in $\mathbb{A}_q^2$ plus $q+1$ "points at infinity".)
 * There are $q^2 + q + 1$ different cards. (The $q^2 + q$ lines in $\mathbb{A}_q^2$ plus one "line at infinity".)
 
-Note that the construction depends on the existence of a field $\mathbb{F}_q$ with $q$ elements. Such a field exists if and only if $q$ is a prime power, i.e. $q=p^n$ for some prime number $p$ and natural exponent $n$. For $n=1$ this is just the residual ring $\mathbb{Z}/p\mathbb{Z}$ where the arithmetic is defined by calculating everything modulo $p$. But in general, for $n>1$, the field $\mathbb{F}_{p^n}$ is _not_ isomorphic to 
+Note that the construction depends on the existence of a finite field with $q$ elements. Such a field exists if and only if $q$ is a prime power, i.e. $q=p^n$ for some prime number $p$ and natural exponent $n$. For $n=1$ this is just the residual ring $\mathbb{Z}/p\mathbb{Z}$ where the arithmetic is defined by calculating everything modulo $p$. But in general, for $n>1$, the field $\mathbb{F}_{p^n}$ is _not_ isomorphic to 
 $\mathbb{Z}/p^n\mathbb{Z}$. The arithmetic in these general fields is somehow less obvious, and that's the reason we need a specialiced library for that. 
