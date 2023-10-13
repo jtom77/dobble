@@ -1,7 +1,5 @@
 # Dobble and geometry
 
-# Constructing a Dobble card deck
-
 The card deck of a Dobble game is defined by the rules
 
 1. Any two cards have exactly one symbol in common.
@@ -13,22 +11,21 @@ It turns out that these requirements have an exact geometrical analogue. In two-
 2. Any two points lie on (define) exactly one line. 
 
 Since these characteristics depend only on the underlying vector-space, they particularly hold for vector-spaces over *finite fields* $\mathbb{F}_q$ with $q$ elements. So the strategy to construct a Dobble card game is as follows. Associate "card" with "line" and "symbol" with "point" and consider the affine plane $\mathbb{A}^2_q$ over the vector space $\mathbb{F}_q^2$. Next, construct every line in $\mathbb{A}^2_q$. Consider therefore that every line is defined by an equation
-$
-\begin{equation}
-    \mathbf{w}\cdot\mathbf{x} + b = 0 
-\end{equation}
-$
+$$\mathbf{w}\cdot\mathbf{x} + b = 0\tag{1}$$
 for some $\mathbf{w} \in \mathbb{F}_q^2$ and $b\in \mathbb{F}_q$. In other words, each line is defined by a tuple $(\mathbf{w}, b)$ where $\mathbf{w}$ ranges over all different "directions" of the vector space. It is easily verified that 
 
-$$W := \left\{ (\bar 0,\bar 1)^T \right\} \cup \left\{ (\bar 1, \bar 0)^T, (\bar 1, \bar 2)^T, \ldots, (\bar 1,\overline{q-1})^T \right\} \subset \mathbb{F}_q^2$$
+$$W := \left\lbrace (\bar 0,\bar 1)^T \right\rbrace \cup \left\lbrace (\bar 1, \bar 0)^T, (\bar 1, \bar 2)^T, \ldots, (\bar 1,\overline{q-1})^T \right\rbrace \subset \mathbb{F}_q^2$$
 
 is a complete and linear independent set representing all the directions in $\mathbb{A}_q ^2$. 
 With basic linear algebra one can show that the $(q+1) \cdot q$ tuples $(\mathbf{w}, b) \in W \times \mathbb{F}_q$ really define all the lines in 
-$\mathbb{A}_q^2$. Note that for every vector $\mathbf{x} = (x_1,x_2)^T$ in equation (1) it is true that if you fix any component $x_1$ or $x_2$, there is exactly one solution for the other one. It follows that every line contains exactly $q$ points. 
+$\mathbb{A}_q^2$ and that for every $(\mathbf{w}, b)$ there are exactly $q+1$ points satisfying equation (1). 
 
-The picture shows all the groups of parallel lines in the affine plane $\mathbb{A}_7^2$. 
+The following picture shows the eight groups of parallel lines in the affine plane $\mathbb{A}_7^2$. 
+Note that each drawing direction actually matches one of the directions in $W$ if you regard them modulo 7. 
 
 ![All lines](plane-1.png)
+
+## Projective planes over finite fields 
 
 Now, two different lines intersect in one point if they are _not parallel_, i.e. they have different norm vectors $\mathbf{w}$, 
 whereas two lines with the same directions don't have a point in common in the affine plane. 
