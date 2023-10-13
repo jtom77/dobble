@@ -19,6 +19,7 @@ $
 \end{equation}
 $
 for some $\mathbf{w} \in \mathbb{F}_q^2$ and $b\in \mathbb{F}_q$. In other words, each line is defined by a tuple $(\mathbf{w}, b)$ where $\mathbf{w}$ ranges over all different "directions" of the vector space. It is easily verified that 
+
 $$W := \left\{ (\bar 0,\bar 1)^T \right\} \cup \left\{ (\bar 1, \bar 0)^T, (\bar 1, \bar 2)^T, \ldots, (\bar 1,\overline{q-1})^T \right\} \subset \mathbb{F}_q^2$$
 
 is a complete and linear independent set representing all the directions in $\mathbb{A}_q ^2$. 
