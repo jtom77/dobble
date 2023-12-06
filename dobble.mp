@@ -7,16 +7,19 @@ MID := ((N-1)/2,(N-1)/2);
 
 def randomcolor = (uniformdeviate(1), uniformdeviate(1), uniformdeviate(1)) enddef;
 
+% Return the line with direction d and offset offs 
+% in the affine plane $A_N^2$.    
 vardef get_line(expr d, offs) = 
 
-    % linear path segments, might be a degenerated path with only one point 
+    % straigh path segments, 
+    % might be a degenerated path with only one point 
     path seg[];
 
     len := 0;
     seg[len] := (0, offs);
     
     for i=0 upto N-1:
-        pair q,qmod;
+        pair q, qmod;
         q := point length(seg[len]) of seg[len] + d;
         qmod := (xpart q mod N, ypart q mod N);
         if q=qmod:
@@ -30,20 +33,23 @@ vardef get_line(expr d, offs) =
     % Sort the segments descending bei their y coordinate 
     seg := sort_desc(len-1)(seg);
 
-    % Every second segment should reverse it direction before merged
+    % Every segment with odd index should reverse its direction 
+    % before it is connected. 
     for i=0 upto len:
         if odd i: seg[i] := reverse(seg[i]); fi
     endfor;
 
     path p; p := seg[0];
     for i=1 upto len-1:
-        p := merge_lines(p, seg[i]);
+        p := connect_lines(p, seg[i]);
     endfor;
 
     p
 enddef;
 
-vardef merge_lines(expr p, q) =
+% Connects the given paths p and q 
+% with a curved segment. 
+vardef connect_lines(expr p, q) =
     stretch := 6;
     pair d;
 
@@ -60,6 +66,8 @@ vardef merge_lines(expr p, q) =
     p .. controls (a+d) and (b+d) .. q
 enddef;
 
+% Sort the array of paths p descending by the 
+% y coordinate of their respective starting point
 vardef sort_desc(expr l)(suffix p) = 
     path swp;
     for i=0 upto l-1: 
@@ -74,19 +82,22 @@ vardef sort_desc(expr l)(suffix p) =
     p
 enddef;
 
+% Draw the lines with the given style
 def draw_line(expr p) = 
     draw p withpen pencircle scaled 4pt withcolor white;
     draw p withpen pencircle scaled 2pt withcolor randomcolor;
 enddef;
 
+% Draw the tile for the given direction w. 
+% 
+% Note that, for visual reasons, the picture is drawn only for the absolute x- and y-parts of w and
+% only afterward, the whole picture is transformed according to the actual values.    
 vardef draw_tile(expr w, p_inf) =
 
     path qq[];
     boolean rotate;
     rotate := false;
-
-    % The vector v is used to actually draw the lines. 
-    % Afterwards, the whole picture is transformed to match the input w. 
+ 
     transform t;
     t := identity;
     pair v; 
@@ -152,6 +163,7 @@ vardef draw_tile(expr w, p_inf) =
     p
 enddef;
 
+% Draw all the tiles
 vardef draw_pic(expr p_inf) = 
 
     picture pic[];
@@ -172,6 +184,7 @@ vardef draw_pic(expr p_inf) =
 
     fill bbox currentpicture withcolor black;
     draw pic[6];
+
 enddef;
 
 
