@@ -1,6 +1,6 @@
 # Dobble and geometry
 
-The card deck of a Dobble game is defined by the rules
+The card deck of a _perfect_ Dobble game (i.e. one with the maximal number of cards) is defined by the rules
 
 1. Any two cards have exactly one symbol in common.
 2. Any two symbols appear together on exactly one card.
@@ -14,9 +14,9 @@ Since these characteristics depend only on the underlying vector-space, they par
 $$\mathbf{w}\cdot\mathbf{x} + b = 0\tag{1}$$
 for some $\mathbf{w} \in \mathbb{F}_q^2$ and $b\in \mathbb{F}_q$. In other words, each line is defined by a tuple $(\mathbf{w}, b)$ where $\mathbf{w}$ ranges over all different "directions" of the vector space. It is easily verified that 
 
-$$W := \left\lbrace (\bar 0,\bar 1)^T \right\rbrace \cup \left\lbrace (\bar 1, \bar 0)^T, (\bar 1, \bar 2)^T, \ldots, (\bar 1,\overline{q-1})^T \right\rbrace \subset \mathbb{F}_q^2$$
+$$W := \left\lbrace (\bar 0,\bar 1)^T \right\rbrace \cup \left\lbrace (\bar 1, \bar 0)^T, (\bar 1, \bar 1)^T, (\bar 1, \bar 2)^T, \ldots, (\bar 1,\overline{q-1})^T \right\rbrace \subset \mathbb{F}_q^2$$
 
-is a complete and linear independent set representing all the directions in $\mathbb{A}_q ^2$. 
+is a minimal and complete set representing all the directions in $\mathbb{A}_q ^2$ (i.e., the elements are pairwise linearly independent and any other vector is a multiple of one of these). 
 With basic linear algebra one can show that the $(q+1) \cdot q$ tuples $(\mathbf{w}, b) \in W \times \mathbb{F}_q$ really define all the lines in 
 $\mathbb{A}_q^2$ and that for every $(\mathbf{w}, b)$ there are exactly $q+1$ points satisfying equation (1). 
 
@@ -43,4 +43,4 @@ This finishes the construction of the $\mathbb{F}_{q}$ Dobble card game. Substit
 * There are $q^2 + q + 1$ different cards. (The $q^2 + q$ lines in $\mathbb{A}_q^2$ plus one "line at infinity".)
 
 Note that the construction depends on the existence of a finite field with $q$ elements. Such a field exists if and only if $q$ is a prime power, i.e. $q=p^n$ for some prime number $p$ and natural exponent $n$. For $n=1$ this is just the residual ring $\mathbb{Z}/p\mathbb{Z}$ where the arithmetic is defined by calculating everything modulo $p$. But in general, for $n>1$, the field $\mathbb{F}_{p^n}$ is _not_ isomorphic to 
-$\mathbb{Z}/p^n\mathbb{Z}$. The arithmetic in these general fields is somehow less obvious, and that's the reason we need a specialiced library for that. 
+$\mathbb{Z}/p^n\mathbb{Z}$. The arithmetic in these general fields is somehow less obvious, and that's the reason we need a specialiced Python-library _Galois_ for that. 
