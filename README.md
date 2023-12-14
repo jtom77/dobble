@@ -23,7 +23,7 @@ $\mathbb{A}_q^2$ and that for every $(\mathbf{w}, b)$ there are exactly $q+1$ po
 The following picture shows the eight groups of parallel lines in the affine plane $\mathbb{A}_7^2$. 
 Note that each drawing direction actually matches one of the directions in $W$ if you regard them modulo 7. 
 
-![All lines](dobble-1.png)
+![All lines](mp/dobble-1.png)
 
 ## Projective planes over finite fields 
 
@@ -34,9 +34,9 @@ $p_{\mathbf{w}} \not\in\mathbb{A}_q^2$, called a "point at infinity", to every l
 
 The picture shows the affine lines from the first picture plus the point at infinity.
 
-![All lines](dobble-2.png)
+![All lines](mp/dobble-2.png)
 
-This finishes the construction of the $\mathbb{F}_{q}$ Dobble card game. Substituting "card" with "line" and "point" with symbol, we see that all the required properties for the Dobble desk are satisfied. Numberwise, the desk has the following properties:
+This finishes the construction of the $\mathbb{F}_{q}$ Dobble card game. Substituting "card" with "line" and "point" with "symbol", we see that all the required properties for the Dobble desk are satisfied. Numberwise, the desk has the following properties:
 
 * Every card contains $q+1$ symbols. (Every line contains $q$ normal points plus one "point at infinity".)
 * There are $q^2 + q + 1$ different symbols. (The $q^2$ points in $\mathbb{A}_q^2$ plus $q+1$ "points at infinity".)
